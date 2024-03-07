@@ -1,0 +1,535 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit&display=swap');
+body{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Outfit", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+
+}
+
+.other_month{
+   
+    color: #918f8fa7;
+}
+
+.hammagi_container{
+    width: 85%;
+    height: 90vh;
+    background-color: #fff;
+    display: flex;
+    gap: 20px;
+}
+.hammagi_container .hammagi_calendar{
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+   width: 70%;
+}
+.hammagi_container .hammagi_calendar .hammagi_header{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.hammagi_container .hammagi_calendar .hammagi_header .hammagi_next_prv{
+display: flex;
+}
+.hammagi_container .hammagi_calendar .hammagi_header .hammagi_next_prv #today{
+margin-left: 10px;
+background-color: blueviolet;
+
+}
+.hammagi_container .hammagi_calendar .hammagi_switch{
+display: flex;
+
+}
+
+.hammagi_container .hammagi_calendar ul{
+    margin: 0;
+    padding: 12px;
+    border: 1px solid #bebcbc92;
+    box-sizing: border-box;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(7,1fr);
+    
+    list-style: none;
+}
+.hammagi_container .hammagi_calendar .list_week li{
+box-sizing: border-box;
+padding:0px 20px ;
+}
+.hammagi_container .hammagi_calendar .list_days li{
+box-sizing: border-box;
+padding:40px 20px;
+border:1px solid #d2cece92 ;
+display: flex;
+justify-content:center;
+align-items: center;
+transition: 0.13s;
+cursor: pointer;
+position: relative;
+}
+
+body.monthactive .hammagi_container .hammagi_calendar .list_days li{
+height: 100vh;
+display: flex;
+flex-direction: column;
+justify-content: right;
+align-items: right;
+padding: 10px 20px;
+}
+body.dayactive .hammagi_container .hammagi_calendar .list_days li{
+height: 100vh;
+}
+body.dayactive .hammagi_container .hammagi_calendar .list_days{
+height: 100vh;
+}
+body.dayactive .hammagi_container .hammagi_calendar .list_week{
+display: none;
+}
+
+.hammagi_container .hammagi_calendar .list_days .event{
+    position: absolute;
+    bottom: 0 ;
+    width: 100%;
+    display: flex;
+    padding: 0px 10px;
+    align-items: center;
+    height: 25px;
+    box-sizing: border-box;
+    color: #ffffffc7;
+    font-size: 0.8rem;
+    cursor: pointer;
+    border: none;
+}
+body.monthactive .hammagi_container .hammagi_calendar .list_days .event{
+    position: relative;
+    bottom: 0 ;
+}
+body.monthactive .allevents{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.hammagi_container .hammagi_calendar .list_days .event:hover{
+    background-color: rgb(0, 255, 102);
+}
+.hammagi_container .hammagi_calendar .list_days li:hover{
+background: #e7e5e538;
+}
+
+ .color{
+width: 20px;
+height: 20px;
+border-radius: 50%;
+cursor: pointer;
+
+}
+.colorA{
+width: 10px;
+height: 10px;
+border-radius: 50%;
+cursor: pointer;
+
+
+}
+
+ .inputsh{
+display: none;
+
+}
+
+.color.colorActive{
+   border: 2px solid #000000;
+   position: relative;
+   overflow: hidden;
+    
+    }
+.color.colorActive::before{
+    content: '';
+   position: absolute;
+   top: 0;
+   width: 100%;
+   height: 100%;
+   background-color: #ffffff9b;
+    
+    }
+.hammagi_events{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    /* box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.1); */
+    border: 1px solid #bebcbc92;
+    width: 30%;
+  
+}
+.hammagi_events .header{
+   width: 100%;
+   background-color: rgb(95, 13, 172);
+   color: #fff;
+   box-sizing: border-box;
+   padding: 10px;
+}
+ .form{
+   width: 100%;
+   box-sizing: border-box;
+   padding: 10px;
+   display: flex;
+   flex-direction: column;
+   gap: 6px;
+}
+ .form input,.form textarea,.form #select,.form #selectt{
+    box-sizing: border-box;
+    padding: 6px;
+    border: 1px solid #bebcbcc5;
+    outline: none;
+    resize: none;
+    
+}
+
+.form textarea{
+ height: 100px;
+ width: 100%;
+}
+.form .selectco{
+    width: 100%;
+    position: relative;
+}
+.form #select,.form #selectt{
+   width: 100%;
+   background: none;
+   text-align: left;
+   cursor: pointer;
+   
+}
+
+.form .categories{
+    width: 100%;
+    flex-direction: column;
+    display: none;
+    position: absolute;
+    top: 33px;
+    transition: 0.1s;
+    background: #fff;
+    border: 1px solid #9594949e;
+}
+.form .cat{
+display: flex;
+align-items: center;
+gap: 10px;
+
+}
+.form #catshow{
+display: flex;
+align-items: center;
+gap: 5px;
+
+}
+.form .categories button{
+display: flex;
+cursor: pointer;
+padding: 6px;
+gap: 10px;
+background: none;
+border: none;
+align-items: center;
+
+}
+.form .categories button:hover{
+    background-color: #cec9c946;
+}
+body.Activecolor .form .categories{
+display: flex;
+top: 20px;
+}
+body.Activef .form .categories{
+display: flex;
+top: 20px;
+}
+body.ActiveDetail .hammagi_events .form .categories{
+    display: none;
+}
+.cateEdit,.valcate{
+    display: flex;
+    gap: 7px;
+    align-items: center;
+}
+
+.hammagi_events .form .btnsT{
+margin-top: 30px;
+width: 100%;
+display: flex;
+gap: 10px;
+justify-content: center;
+    
+}
+.hammagi_events .form .btnsT button{
+    padding: 8px 10px;
+    border:none;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+}
+.hammagi_events .form .btnsT #add{
+    background-color: rgb(95, 13, 172);
+
+}
+.hammagi_events .form .title{
+color: #0000009d;
+}
+.hammagi_events .form .btnsT #cancel{
+    background-color: rgb(203, 8, 8);
+
+}
+body.ActiveDetail .details{
+    display: flex;
+}
+.details{
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background-color: #00000072;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    display: none;
+}
+.details .card{
+    width: 40%;
+    height: 80%;
+    background: #fff;
+    border-radius: 20px;
+    position: relative;
+}
+.details .card .card_header{
+    width: 100%;
+    box-sizing: border-box;
+    padding:0px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.details .card .card_header i{
+    font-size: 1.3rem;
+}
+.details .information{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    position: relative;
+  
+}
+.details .information .form{
+    width: 100%;
+    box-sizing: border-box;
+    padding:0px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    
+   
+ }
+
+ .details .information .form .title{
+    font-weight: bold;
+ 
+ }
+ .details .information .form .val{
+    color: #000000b8;
+ 
+ }
+ .details  .btnsT{
+    width: 100%;
+    display: flex;
+    justify-content: right;
+    box-sizing: border-box;
+    padding: 20px;
+    gap: 10px;
+   margin-top: 40px;
+ }
+ .details  .btnsT button{
+    padding:7px 10px;
+   color: #fff;
+   border: none;
+   cursor: pointer;
+ 
+ }
+ .details  .btnsT #Edit{
+   background-color: #2164d6;
+
+ 
+ }
+ .details  .btnsT #Delete{
+background-color: rgb(215, 9, 9);
+ 
+ }
+ .details  .btnsT #Close{
+    background-color: #232121;
+
+ 
+ }
+ .details  .close{
+   cursor: pointer;
+
+ 
+ }
+ .details  .close:hover{
+   color: #0000009c;
+
+ 
+ }
+ .details  .hammagi_events{
+    flex-direction: column;
+    gap: 10px;
+    /* box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.1); */
+    border: none;
+    width: 100%;
+    display: none;
+    background-color: #000000;
+  
+}
+body.AciveEdit  .details  .hammagi_events{
+    display: flex;
+}
+body.AciveEdit  .details  .values{
+    display: flex;
+}
+.inp{
+    display: none;
+}
+.information.AciveEdit .inp{
+    display: flex;
+}
+.information.AciveEdit .cu{
+    display: none;
+}
+.information.AciveEdit .btnsT{
+    margin-top: 0;
+}
+
+.dayinfo{
+    display: flex;
+    width: 300px;
+    background-color: #ddd0852c;
+    padding: 10px;
+}
+.dayE{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.eventss{
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.eventss .eventt{
+    width: 100%;
+    padding: 10px;
+    font-size: 0.8rem;
+    border: none;
+    color: #fff;
+    text-align: left;
+    cursor: pointer;
+}
+.errors{
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    display: none;
+    justify-content: center;
+    align-items: center;
+     z-index: 999;
+}
+.errors .carderror{
+   width: 400px;
+   height: 150px;
+   box-shadow: 0px 0px 4px 3px rgba(0, 0, 0, 0.1);
+   background: #fff;
+   box-sizing: border-box;
+   padding: 10px;
+   display: flex;
+   flex-direction: column;
+   gap: 20px;
+  
+}
+.errors .carderror .message{
+    color: rgba(255, 38, 0, 0.866);
+    background-color:rgba(255, 38, 0, 0.049) ;
+    padding: 6px;
+    box-sizing: border-box;
+}
+.errors .carderror button{
+    width: max-content;
+    padding: 6px;
+    border: none;
+    background-color: #d31b1b;
+    color: #fff;
+    cursor: pointer;
+}
+body.Activeerror .errors{
+    display: flex;
+}
+.hammagi_container .hammagi_calendar .hammagi_next_prv button{
+    padding: 6px;
+    border: none;
+    background-color: rgb(95, 13, 172);
+    color: #fff;
+    cursor: pointer;
+    }
+ .hammagi_switch .btn{
+    padding: 6px;
+    border: none;
+    background-color: rgb(95, 13, 172);
+    color: #fff;
+    cursor: pointer;
+    }
+
+.check{
+    background: blueviolet;
+    color: #fff;
+}
+.hammagi_switch .checked{
+    background: blueviolet;
+    color: #fff;
+}
+
+
+body.dayactive .hammagi_switch .btnz3{
+    background: blueviolet;
+   
+}
+body.monthactive .hammagi_switch .btnz2{
+    background: blueviolet;
+   
+}
+body.dayactive .hammagi_switch .checked{
+    background: rgb(95, 13, 172);
+   
+}
+body.monthactive .hammagi_switch .checked{
+    background: rgb(95, 13, 172);
+   
+}
+
+body.yactive .hammagi_switch .btnz1{
+    background:blueviolet ;
+   
+}

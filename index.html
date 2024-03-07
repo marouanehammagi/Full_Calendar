@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+</head> 
+<body>
+    <div class="details">
+        <div class="card">
+            <div class="card_header">
+                <h3>Details</h3>
+                <i class='bx bx-x close'></i>
+            </div>
+            <div class="information">
+                    <div class="form values">
+                        <div class="title">Title :</div>
+                        <div class="valtitle cu"></div>
+                        <input type="text" id="titleEdit" class="inp">
+                        <div class="title">Description :</div>
+                        <div class="valdesc cu"></div>
+                        <input type="text" id="descEdit" class="inp">
+                        <div class="valcolor cu"></div>
+                        <div class="title cat">Categorie : <div class="cateEdit inp"></div></div>
+                        <div class="valcate cu"></div>
+                        <div class="selectco inp">
+                            <button id="select" onclick="toggleCategories()">Select Category</button>
+                            <div class="categories" id="categoryList">
+                              <button onclick="checkcolor({categorie:'cat1',color:'lightseagreen'})"><div style="background:lightseagreen ;" class="colorA cl1"></div> cat 1</button>
+                              <button onclick="checkcolor({categorie:'cat2',color:'rgb(120, 32, 178)'})"><div style="background:rgb(120, 32, 178) ;" class="colorA cl2"></div> cat 2</button>
+                              <button onclick="checkcolor({categorie:'cat3',color:'rgb(59, 178, 32)'})"><div style="background:rgb(59, 178, 32) ;" class="colorA cl3"></div> cat 3</button>
+                              <button onclick="checkcolor({categorie:'cat4',color:'rgb(178, 32, 154)'})"><div style="background:rgb(178, 32, 154) ;" class="colorA cl4"></div> cat 4</button>
+                              <button onclick="checkcolor({categorie:'cat5',color:'rgb(211, 199, 26)'})"><div style="background:rgb(211, 199, 26) ;" class="colorA cl5"></div> cat 5</button>
+                            </div>
+                          </div>
+                        <div class="title">Start</div>
+                        <div class="valstart cu"></div>
+                        <input type="datetime-local" id="startEdit"  class="inp">
+                        <div class="title">End</div>
+                        <div class="valend cu"></div>
+                        <input type="datetime-local" id="endEdit"  class="inp">
+                       
+        
+                    </div>
+                    
+                <div class="btnsT">
+                        <button id="Edit" class="inp"  onclick="EditEvent()">Update</button>
+                        <button id="Edit" class="cu"  onclick="handelEdit()">Edit</button>
+                        <button id="Delete" onclick="DeleteEvent()">Delete</button>
+                        <button id="Close" >Close</button>
+                    </div>
+            </div>
+           
+        </div>
+    </div>
+    <div class="errors">
+        <div class="carderror">
+            <b>message error</b>
+            <div class="message">messsage</div>
+            <button onclick="closeerror()">close</button>
+            
+        </div>
+    </div>
+    <div class="hammagi_container">
+       <div class="hammagi_calendar">
+            <div class="hammagi_header">
+                <div class="hammagi_next_prv">
+                    <button id="prv"><i class='bx bx-chevron-left'></i></button>
+                    <button id="next"><i class='bx bx-chevron-right'></i></button>
+                    <button id="today">today</button>
+                </div>
+                <div class="hammagi_date">
+                    <span>Mars 2024</span>
+                </div>
+                <div class="hammagi_switch">
+                    <button onclick="handelmonths()" class="btn checked btnz1">month</button>
+                    <button onclick="handelweeks()" class="btn btnz2">week</button>
+                    <button onclick="handeldays()" class="btn btnz3">day</button>
+                </div>
+
+            </div>
+            <div class="list">
+                <ul class="list_week">
+                    <li id="sun">Sun</li>
+                    <li id="mon">Mon</li>
+                    <li id="tue">Tue</li>
+                    <li id="wed">Wed</li>
+                    <li id="thu">Thu</li>
+                    <li id="fri">Fri</li>
+                    <li id="sat">Sat</li>
+                </ul>
+                <ul class="list_days">
+                    
+                </ul>
+
+            </div>
+       </div>
+       <div class="hammagi_events">
+            <div class="header">
+                 <span>Add new event</span>
+            </div>
+            <div class="form">
+                <div class="title">Title</div>
+                <input type="text" id="title">
+                <div class="title">Description</div>
+                <textarea name="" id="desc" ></textarea>
+                <div class="title cat">Categorie <div id="catshow"></div></div>
+                <div class="selectco">
+                    <button id="selectt" onclick="toggleCa()">Select Category</button>
+                    <div class="categories" id="categoryListt">
+                      <button onclick="checkcolor({categorie:'cat1',color:'lightseagreen'})"><div style="background:lightseagreen ;" class="colorA cl1"></div> cat 1</button>
+                      <button onclick="checkcolor({categorie:'cat2',color:'rgb(120, 32, 178)'})"><div style="background:rgb(120, 32, 178) ;" class="colorA cl2"></div> cat 2</button>
+                      <button onclick="checkcolor({categorie:'cat3',color:'rgb(59, 178, 32)'})"><div style="background:rgb(59, 178, 32) ;" class="colorA cl3"></div> cat 3</button>
+                      <button onclick="checkcolor({categorie:'cat4',color:'rgb(178, 32, 154)'})"><div style="background:rgb(178, 32, 154) ;" class="colorA cl4"></div> cat 4</button>
+                      <button onclick="checkcolor({categorie:'cat5',color:'rgb(211, 199, 26)'})"><div style="background:rgb(211, 199, 26) ;" class="colorA cl5"></div> cat 5</button>
+                    </div>
+                  </div>
+                <div class="title">Start</div>
+                <input type="datetime-local" id="start">
+                <div class="title">End</div>
+                <input type="datetime-local" id="end">
+                <div class="btnsT">
+                    <button id="add"><i class='bx bx-plus'></i> Add</button>
+                    <button onclick="handelcancel()" id="cancel"><i class='bx bx-x'></i> Cancel</button>
+                </div>
+
+            </div>
+       </div>
+    </div>
+    <script src="scripts.js"></script>
+</body>
+</html>
