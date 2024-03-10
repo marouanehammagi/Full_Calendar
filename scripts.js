@@ -47,11 +47,7 @@ var months = [
     "September", 
     "October", 
     "November", 
-<<<<<<< HEAD
     "December"
-=======
-    "December",
->>>>>>> b9e4e2e956609394609f2c759944b60cdd0b1604
   ];
 
   function handelDetail(event){
@@ -221,8 +217,7 @@ var events = allevents.filter(function (event) {
                         days += index==date.getDate() && currYear==currYearfix && currMonth==currMonthfix ? '<li class="check" >'+index+'</li>' :  '<li><div class="allevents">'+index+eventsHTML+'</div></li>';   
 
                     }else {
-                        days += index==date.getDate() && currYear==currYearfix && currMonth==currMonthfix ? '<li class="check" onclick="handelDetail(\'' + encodeURIComponent(JSON.stringify(singledata)) + '\')">'+index+'<div class="event"  style="background:'+events[i].Color+'">'+text+'</div></li>' :  
-                        '<li onclick="handelDetail(\'' + encodeURIComponent(JSON.stringify(singledata)) + '\')">'+index+'<div class="event"  style="background:'+events[i].Color+'">'+text+'</div></li>';   
+                        days += index==date.getDate() && currYear==currYearfix && currMonth==currMonthfix ? '<li class="check" onclick="handelDetail(\'' + encodeURIComponent(JSON.stringify(singledata)) + '\')">'+index+'<div class="event"  style="background:'+events[i].Color+'">'+text+'</div></li>' :  '<li onclick="handelDetail(\'' + encodeURIComponent(JSON.stringify(singledata)) + '\')">'+index+'<div class="event"  style="background:'+events[i].Color+'">'+text+'</div></li>';   
 
                     }
                     t=true
@@ -493,46 +488,6 @@ else if(HourStart>HourEnd){
 }
 
 
-// function checkColors(classE){
-// for (let ind = 0; ind < classE.length; ind++) {
-//     classE[ind].addEventListener('click', (e)=>{
-//         switch (ind){
-//             case 0 :
-//                 colorchecked='lightseagreen'
-//             break;
-//             case 1 :
-//                 colorchecked="rgb(120, 32, 178)"
-//             break;
-//             case 2 :
-//                 colorchecked="rgb(59, 178, 32)"
-//             break;
-//             case 3 :
-//                 colorchecked="rgb(178, 32, 154)"
-//             break;
-//             case 4 :
-//                 colorchecked="rgb(234, 13, 13);"
-//             break;
-            
-//         }
-       
-//         for (let j = 0; j < classE.length; j++) {
-//             if (classE[ind]!=classE[j]) {
-//                 classE[j].classList.remove('colorActive')
-//             }
-            
-//         }
-//      classE[ind].classList.add('colorActive')
-     
-//     })
-    
-// }
-
-// }
-
-// checkColors(cl)
-// checkColors(clA)
-
-
 function toggleCategories() {
     document.body.classList.toggle('Activecolor');
   }
@@ -650,6 +605,7 @@ function handelmonths(){
         y = false
         document.body.classList.remove('monthactive')
         document.body.classList.remove('dayactive')
+        document.body.classList.add('yactive')
         handelCalender()
 }
 // show weeks 
@@ -664,6 +620,7 @@ function handelweeks(){
         handelCalender()
         document.body.classList.add('monthactive')
         document.body.classList.remove('dayactive')
+        document.body.classList.remove('yactive')
 }
 // show days 
 
@@ -676,14 +633,17 @@ function handeldays(){
          }
         handelCalender()
         document.body.classList.add('dayactive')
+        document.body.classList.remove('monthactive')
+        document.body.classList.remove('yactive')
  
 }
+
 function handelcancel(){
-     document.getElementById('title').value=""
-    // categorieselected,
-     document.getElementById('desc').value=""
-    // colorselected,
-    document.getElementById('start').value=""
-    document.getElementById('end').value=""
-    document.getElementById('catshow').innerHTML=""
+    document.getElementById('title').value=""
+   // categorieselected,
+    document.getElementById('desc').value=""
+   // colorselected,
+   document.getElementById('start').value=""
+   document.getElementById('end').value=""
+   document.getElementById('catshow').innerHTML=""
 }
