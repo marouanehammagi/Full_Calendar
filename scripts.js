@@ -36,44 +36,51 @@ var colorselected = ''
 var allevents = [];
 
 var months = [
-    "Januar",
-    "Februar",
-    "März",
-    "April",
-    "Mai",
-    "Juni",
-    "Juli",
-    "August",
-    "September",
-    "Oktober",
-    "November",
-    "Dezember",
+    "January", 
+    "February", 
+    "March", 
+    "April", 
+    "May", 
+    "June", 
+    "July", 
+    "August", 
+    "September", 
+    "October", 
+    "November", 
+    "December"
   ];
 
-function handelDetail(event){
-    document.body.classList.add('ActiveDetail');
-    const { Color, Title, Description, Categorie, Start, End, ID } = JSON.parse(decodeURIComponent(event));
-    console.log({ Color, Title, Description, Categorie, Start, End, ID });
-    colorchecked = Color;
-    valtitle.innerHTML = Title;
-    valdesc.innerHTML = Description;
-    valcate.innerHTML = `<div class='colorA' style='background:${Color}'></div> ${Categorie}`;
-    valstart.innerHTML = Start;
-    valend.innerHTML = End;
-    IDE = ID;
+  function handelDetail(event){
+    document.body.classList.add('ActiveDetail')
+    var jsonString = decodeURIComponent(event);
+    var jsonObject = JSON.parse(jsonString);
+  console.log(jsonObject)
+  colorchecked = jsonObject.Color
+    valtitle.innerHTML=jsonObject.Title
+    valdesc.innerHTML=jsonObject.Description
+    valcate.innerHTML=`<div class='colorA' style='background:${colorchecked}'></div> ${jsonObject.Categorie}`
+    valstart.innerHTML=jsonObject.Start
+    valend.innerHTML=jsonObject.End
+    IDE = jsonObject.ID
 
-    // Update input values
-    TitleUpdate.value = Title;
-    DescriptionUpdate.value = Description;
-    CategorieUpdate.innerHTML = `<div class='colorA' style='background:${Color}'></div> ${Categorie}`;
-    EndUpdate.value = End;
-    StartUpdate.value = Start;
+    //input values
+    TitleUpdate.value=jsonObject.Title
+    DescriptionUpdate.value=jsonObject.Description
+    
+    CategorieUpdate.innerHTML=`<div class='colorA' style='background:${colorchecked}'></div> ${jsonObject.Categorie}`
+    EndUpdate.value=jsonObject.End
+    StartUpdate.value=jsonObject.Start
+    
+    
+    
 }
-
-document.querySelector('.close').addEventListener('click', () => document.body.classList.remove('ActiveDetail'));
-document.getElementById('Close').addEventListener('click', () => document.body.classList.remove('ActiveDetail'));
-
-function checkFormat1(Start,End){
+document.querySelector('.close').addEventListener('click', ()=>{
+    document.body.classList.remove('ActiveDetail') 
+})
+document.getElementById('Close').addEventListener('click', ()=>{
+    document.body.classList.remove('ActiveDetail') 
+})
+  function checkFormat1(Start,End){
     var yearStart = parseInt(Start.split(' ')[0].split('-')[0])
     var MonthStart = parseInt(Start.split(' ')[0].split('-')[1])
     var yearEnd = parseInt(End.split(' ')[0].split('-')[0])
@@ -86,7 +93,6 @@ function checkFormat1(Start,End){
     var EndDay = parseInt(End.split(' ')[0].split('-')[2])
     return [yearStart,MonthStart,StartDay,HourStart,MinStart,yearEnd,MonthEnd,EndDay,HourEnd,MinEnd]
 }
-
 
 
 // get events with ajax using xhr
@@ -113,7 +119,7 @@ var numberofweeks = 1
 var numberofdays = 1
 var firstdayofweek = 1
 var lastdayofweek = 0
-var daysofweek = 0
+
 var lines =6;
 handelCalender = async ()=>{
 var numberDays = new Date(currYear,currMonth+1,0).getDate()
@@ -138,14 +144,15 @@ if (!changetoweek) {
     firstdayofweek = numberDays +nextMonthDays - 6
 }
 
+
 if (!changetoday && !changetoweek) {
     firstdayofweek=1
         lastdayofweek=numberDays
         numberofweeks = 1
 }
 if (changetoday) {
-    firstdayofweek=1
     lastdayofweek=1
+    firstdayofweek=1
     if (nexti && numberofdays>numberDays) {
         numberofdays=1
         currMonth+=1
@@ -155,6 +162,9 @@ if (changetoday) {
         
     }
 }
+
+
+// console.log(events)
 
 if (!changetoday && numberofweeks<=1) {
  for (let i = firstDay - 1; i >= 0; i--) {
@@ -187,10 +197,6 @@ var events = allevents.filter(function (event) {
                 
                 if(index >= check[2] && index<= check[7] && currMonth+1<=check[6] && currMonth+1 >= check[1] && currYear <= check[5] && currYear >= check[0]){
                     var eventfilter = allevents.filter(e=>index >= e.Start.split(' ')[0].split('-')[2] && index <= e.End.split(' ')[0].split('-')[2])
-                    console.log(eventfilter)
-                    
-                    // console.log('filter')
-                    // console.log(eventfilter)
                     count.push({index:index,i:i})
                     var cas = count.find(v=>v.i == i).index == index
                     if (cas) {
@@ -208,7 +214,7 @@ var events = allevents.filter(function (event) {
                             return '<button onclick="handelDetail(\'' + encodeURIComponent(JSON.stringify(singledata)) + '\')" class="event" style="background:' + ColorE + '">' +TitleE+ '</button>';
                           }).join('');
                         //   console.log(eventsHTML)
-                        days += index==date.getDate() && currYear==currYearfix && currMonth==currMonthfix ? '<li class="check" >'+index+eventsHTML+'</li>' :  '<li><div class="allevents">'+index+eventsHTML+'</div></li>';   
+                        days += index==date.getDate() && currYear==currYearfix && currMonth==currMonthfix ? '<li class="check" >'+index+'</li>' :  '<li><div class="allevents">'+index+eventsHTML+'</div></li>';   
 
                     }else {
                         days += index==date.getDate() && currYear==currYearfix && currMonth==currMonthfix ? '<li class="check" onclick="handelDetail(\'' + encodeURIComponent(JSON.stringify(singledata)) + '\')">'+index+'<div class="event"  style="background:'+events[i].Color+'">'+text+'</div></li>' :  
@@ -265,7 +271,6 @@ var events = allevents.filter(function (event) {
             }).join('');
             
             let container = `<div class='eventss'>${content}</div>`;
-            console.log(container);
             display.innerHTML =`<div class='dayE'>${header + container}</div>` ;
             
         }else{
@@ -347,13 +352,64 @@ next.addEventListener('click', ()=>{
     
     
 })
-today.addEventListener('click', ()=>{
- currMonth = date.getMonth()
- currYear = date.getFullYear()
- daysofweek=0
-    handelCalender()
-    
-})
+
+function makeweek(day){
+    var dayf= new Date(currYear,currMonth,1).getDay()
+    var restday = 7-dayf
+    var first1 =  restday+1
+    var last1 =  first1+6
+    var first2 =  last1+1
+    var last2 =  first2+6
+    var first3 =  last2+1
+    var last3 =  [10,20,30].includes(first2) ? first3+5 : first3+6
+    var first4 =  last3+1
+    var last4 = [10,20,30].includes(first3) ? first4+5 : first4+6
+    var first5 =  last4+1
+    var last5 = new Date(currYear,currMonth+1,0).getDate()
+    if (dayf+day<=7) {
+       numberofweeks = 1
+       firstdayofweek = 1
+       lastdayofweek=restday
+    }
+    if (dayf+day>7 && dayf+day<=14) {
+       numberofweeks = 2
+       firstdayofweek =first1
+       lastdayofweek= last1 
+    }
+    if (dayf+day>14 && dayf+day<=21) {
+       numberofweeks = 3
+       firstdayofweek =first2
+       lastdayofweek= last2
+       
+    }
+    if (dayf+day>21 && dayf+day<=28) {
+       numberofweeks = 4
+       firstdayofweek =first3
+       lastdayofweek= last3
+    }
+    if (dayf+day>28 && dayf+day<=35) {
+       numberofweeks = 5
+       firstdayofweek =first4
+       lastdayofweek= last4
+       
+    }
+    if (dayf+day>35) {
+       numberofweeks = 6
+       firstdayofweek =first5
+       lastdayofweek= last5   
+    }
+   
+}
+
+today.addEventListener('click',handeltoday)
+function handeltoday(){
+    currMonth = date.getMonth()
+    currYear = date.getFullYear()
+    numberofdays = date.getDate()
+    makeweek(date.getDate())
+       handelCalender()
+       
+   }
 
 // send request to php server with ajax yooo
 
@@ -431,6 +487,46 @@ else if(HourStart>HourEnd){
 }
    
 }
+
+
+// function checkColors(classE){
+// for (let ind = 0; ind < classE.length; ind++) {
+//     classE[ind].addEventListener('click', (e)=>{
+//         switch (ind){
+//             case 0 :
+//                 colorchecked='lightseagreen'
+//             break;
+//             case 1 :
+//                 colorchecked="rgb(120, 32, 178)"
+//             break;
+//             case 2 :
+//                 colorchecked="rgb(59, 178, 32)"
+//             break;
+//             case 3 :
+//                 colorchecked="rgb(178, 32, 154)"
+//             break;
+//             case 4 :
+//                 colorchecked="rgb(234, 13, 13);"
+//             break;
+            
+//         }
+       
+//         for (let j = 0; j < classE.length; j++) {
+//             if (classE[ind]!=classE[j]) {
+//                 classE[j].classList.remove('colorActive')
+//             }
+            
+//         }
+//      classE[ind].classList.add('colorActive')
+     
+//     })
+    
+// }
+
+// }
+
+// checkColors(cl)
+// checkColors(clA)
 
 
 function toggleCategories() {
@@ -541,39 +637,43 @@ function  handelEdit(){
 
 
 // show weeks 
-
+var x = false
+var y = false
 function handelmonths(){
         changetoweek = false
         changetoday = false
+        x = false
+        y = false
         document.body.classList.remove('monthactive')
         document.body.classList.remove('dayactive')
-        document.body.classList.add('yactive')
         handelCalender()
 }
 // show weeks 
 
 function handelweeks(){
-         daysofweek = 0
          changetoweek = true
          changetoday = false
+         x=true
+         if(y){
+            makeweek(numberofdays)
+         }
         handelCalender()
         document.body.classList.add('monthactive')
         document.body.classList.remove('dayactive')
-        document.body.classList.remove('yactive')
 }
 // show days 
 
 function handeldays(){
-        
+         y = true
          changetoweek = false
          changetoday = true
+         if (x) {
+            numberofdays=firstdayofweek
+         }
         handelCalender()
         document.body.classList.add('dayactive')
-        document.body.classList.remove('monthactive')
-        document.body.classList.remove('yactive')
  
 }
-
 function handelcancel(){
      document.getElementById('title').value=""
     // categorieselected,
