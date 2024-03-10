@@ -47,7 +47,11 @@ var months = [
     "September", 
     "October", 
     "November", 
+<<<<<<< HEAD
     "December"
+=======
+    "December",
+>>>>>>> b9e4e2e956609394609f2c759944b60cdd0b1604
   ];
 
   function handelDetail(event){
